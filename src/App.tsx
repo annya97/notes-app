@@ -5,6 +5,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { v4 as uuidV4 } from 'uuid';
 import { NoteList } from './NoteList';
 import { NewNote } from './NewNote';
+import { NoteLayout } from './NoteLayout';
+import { Note } from './Note';
 import { useLocalStorage } from './useLocalStorage';
 
 export type Tag = {
@@ -82,8 +84,11 @@ function App() {
             />
           }
         />
-        <Route path="/:id">
-          <Route index element={<h1>show</h1>} />
+        <Route
+          path="/:id"
+          element={<NoteLayout notes={notesWithTags} />}
+        >
+          <Route index element={<Note />} />
           <Route path="edit" element={<h1>edit</h1>} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
